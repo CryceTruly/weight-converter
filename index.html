@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <style media="screen">
       body{
-        background: #333;
+        background: #000;
         color:#fff;
       }
     </style>
@@ -18,6 +18,16 @@
     <div class="col-md-6 offset-md-3">
       <br><br>
         <h1 class="display-4 text-center mb-3">Weight Converter</h1>
+<h3>Options</h3><div class="form-group">
+  <select class="form-control" name="" id="searchOption">
+      <option value="pounds">Search By Pounds</option>
+    <option value="ounces">Ounces</option>
+    <option value="grams">grams</option>
+    <option value="kilograms">Kilograms</option>
+  </select>
+</div>
+
+
         <form class="" action="index.html" method="post">
         <div class="form-group">
           <input type="number" name="" id="lbsInput" value="" class="form-control form-control-lg" placeholder="Enter Pounds">
@@ -26,7 +36,7 @@
         <div class="" id="output">
           <div class="card card-success mb-2">
             <div class="card-block">
-              <h4>Grams:</h4>
+              <h4 id="test">Grams:</h4>
               <div class="gramsoutput" id="gramsoutput">
 
               </div>
@@ -34,7 +44,7 @@
           </div>
           <div class="card card-danger mb-2">
             <div class="card-block ">
-              <h4>Ounces:</h4>
+              <h4 id="ou">Ounces:</h4>
               <div class="gramsoutput" id="ogsoutput">
 
               </div>
@@ -42,7 +52,7 @@
           </div>
           <div class="card card-primary mb-2">
             <div class="card-block">
-              <h4>KiloGrams:</h4>
+              <h4 id="kilo">KiloGrams:</h4>
               <div class="gramsoutput" id="kgoutput">
 
               </div>
@@ -53,6 +63,7 @@
   </div>
 </div>
 <script type="text/javascript">
+
 document.getElementById('output').style.visibility='hidden';
   document.getElementById('lbsInput').addEventListener('input',function(e){
     document.getElementById('output').style.visibility='visible';
@@ -61,6 +72,83 @@ document.getElementById('output').style.visibility='hidden';
     document.getElementById('ogsoutput').innerHTML=pound*16;
     document.getElementById('kgoutput').innerHTML=pound/2.2046;
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('searchOption').addEventListener('change',function(e){
+  let searchOption=e.target.value;
+
+  //Pounds
+  if (searchOption=='pounds'){
+    document.getElementById('lbsInput').placeholder='Search pounds';
+    document.getElementById('test').innerHTML='Pounds';
+    document.getElementById('lbsInput').addEventListener('input',function(e){
+      let pound=e.target.value;
+      document.getElementById('gramsoutput').innerHTML=pound/0.0022046;
+        document.getElementById('ogsoutput').innerHTML=pound*16;
+        document.getElementById('kgoutput').innerHTML=pound/2.2046;
+  });
+  //KG
+  }
+
+//TEST IF THEY CHOSE GRAMS
+  if (searchOption=='grams'){
+    document.getElementById('lbsInput').placeholder='Search grams';
+    document.getElementById('test').innerHTML='Pounds';
+      document.getElementById('ou').innerHTML='Ouces';
+    document.getElementById('lbsInput').addEventListener('input',function(e){
+    let gram=e.target.value;
+    document.getElementById('gramsoutput').innerHTML=gram*0.00220462;
+      document.getElementById('ogsoutput').innerHTML=gram*0.035274;
+      document.getElementById('kgoutput').innerHTML=gram*0.001;
+});
+//KG
+  }else if(searchOption=='kilograms'){
+    document.getElementById('lbsInput').placeholder='Search Kilograms';
+    document.getElementById('kilo').innerHTML='Pounds';
+    document.getElementById('test').innerHTML='Grams';
+    document.getElementById('lbsInput').addEventListener('input',function(e){
+    let kilogram=e.target.value;
+    document.getElementById('gramsoutput').innerHTML=kilogram*1000;
+      document.getElementById('ogsoutput').innerHTML=kilogram*35.274;
+      document.getElementById('kgoutput').innerHTML=kilogram*2.20462;
+
+  });
+}
+
+//OUNCE
+else if(searchOption=='ounces'){
+  document.getElementById('lbsInput').placeholder='Search Ounces';
+  document.getElementById('ou').innerHTML='Pounds';
+  document.getElementById('test').innerHTML='Grams';
+  document.getElementById('kilo').innerHTML='Kilograms';
+  document.getElementById('lbsInput').addEventListener('input',function(e){
+  let ounce=e.target.value;
+  document.getElementById('gramsoutput').innerHTML=ounce*28.3495;
+    document.getElementById('ogsoutput').innerHTML=ounce*0.0625;
+    document.getElementById('kgoutput').innerHTML=ounce*0.0283495;
+
+
+});
+}
+
+
+
+
+
+
+
+});
 </script>
   </body>
 </html>
